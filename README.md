@@ -62,3 +62,10 @@ All names below are exported from the package root.
 `width` accepts a name from `WIDTHS` or a positive integer number of seconds.
 Anything else raises `ValueError` (bad name, non-positive number) or `TypeError`
 (bool or non-int, non-str).
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
